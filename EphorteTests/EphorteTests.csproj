@@ -37,12 +37,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gecko.NCore.Client, Version=6.2.0.0, Culture=neutral, PublicKeyToken=e9c98603f94caa83, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Gecko.NCore.Client.7.1.0\lib\net40\Gecko.NCore.Client.dll</HintPath>
+    <Reference Include="Gecko.NCore.Client">
+      <HintPath>..\packages\Gecko.NCore.Client.9.3.2\lib\net40\Gecko.NCore.Client.dll</HintPath>
     </Reference>
     <Reference Include="Gecko.NCore.Client.Documents.V3">
-      <HintPath>..\packages\Gecko.NCore.Client.Documents.V3.6.2.1\lib\net40\Gecko.NCore.Client.Documents.V3.dll</HintPath>
+      <HintPath>..\packages\Gecko.NCore.Client.Documents.V3.6.4.2\lib\net40\Gecko.NCore.Client.Documents.V3.dll</HintPath>
     </Reference>
     <Reference Include="Gecko.NCore.Client.ObjectModel.V3.En">
       <HintPath>..\packages\Gecko.NCore.Client.ObjectModel.V3.En.7.0.0\lib\net40\Gecko.NCore.Client.ObjectModel.V3.En.dll</HintPath>
@@ -81,7 +80,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
