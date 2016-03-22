@@ -31,14 +31,15 @@ namespace EphorteTests
         const string TextFileContent = "The file is checked in as part of the batch insert.";
         const string MainFileName = "TestMainDocument_NOTE";
 
-
         const string SecondAttachmentFileName = "TestAttachmentDocument.pdf";
+
+        const int PredefinedQueryId = -30;//Recent cases
 
 
         //Support-case: 2013/190 
         //http://ephorte/ephorte/?url=shared%2faspx%2fDefault%2fdetails.aspx%3ff%3dViewSA%26SA_ID%3d14327
         //http://ephorte/ephorte/shared/aspx/GetDoc.aspx?JP_ID=29152&JP_HDOKTYPE_G=PDF&WorkFolder=&EphorteDb=EPHORTE
-        
+
         [TestMethod]
         public void CreateRegistryEntryWithPdfDocument()
         {
@@ -79,6 +80,26 @@ namespace EphorteTests
         public void VerifyRecipientFunctionalityX()
         {
             CreateTwoRegistryEntriesOfType("X");
+        }
+
+        [TestMethod]
+        public void PredefinedSearchQuery()
+        {
+            var result = EphorteContext.Query<Query>().FirstOrDefault(q => q.Id == PredefinedQueryId);
+            if (result != null)
+            {
+                var predefQueryResult = (from c in EphorteContext.Query<Case>()
+                                         where QueryContext.Current.StoredQuery(c, PredefinedQueryId)
+                                         select c as DataObject).Any();
+                var regularQueryResult = (from c in EphorteContext.Query<Case>()
+                                          where c.CaseDate < DateTime.Now
+                                          select c).Any();
+                Assert.AreEqual(predefQueryResult, regularQueryResult, "Expected predefined query {0} will return some Cases.", PredefinedQueryId);
+            }
+            else
+            {
+                Assert.Fail("Could not find predefined query for id={0}.", PredefinedQueryId);
+            }
         }
 
         public void CreateTwoRegistryEntriesOfType(string registryEntryTypeId)
