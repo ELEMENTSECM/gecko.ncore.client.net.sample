@@ -2,6 +2,7 @@
 using System.Linq;
 using Gecko.NCore.Client;
 using Gecko.NCore.Client.ObjectModel.V3.En;
+using Gecko.NCore.Client.Querying;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
